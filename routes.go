@@ -18,5 +18,10 @@ var routes = Routes{
 		"/api",
 		APIStatus,
 	},
-	
+		Route{
+		"Express",
+		"GET",
+		"/api/express",
+		Express,
+	},
 }

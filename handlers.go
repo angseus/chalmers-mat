@@ -21,13 +21,23 @@ func APIMiddleware(h http.Handler) http.Handler {
 	})
 }
 
+// API Status
 func APIStatus(w http.ResponseWriter, r *http.Request) {
-
 	s := StatusMessage{"Up and running!", time.Since(startTime).String(), calls}
-
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
 	if err := json.NewEncoder(w).Encode(s); err != nil {
 		panic(err)
 	}
 }
+
+// Express
+func Express(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.WriteHeader(http.StatusOK)
+	if err := json.NewEncoder(w).Encode(express); err != nil {
+		panic(err)
+	}
+}
+
+
