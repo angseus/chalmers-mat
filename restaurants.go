@@ -7,16 +7,46 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// structs for restaurants
+// struct for restaurant
+type Restaurant struct {
+	Name 		string 	`json:"name"` // name of the restaurant
+	Entries 	[]Entry `json:"entries"` // list of dishes for that restaurant
+}
+
+// struct for entry in restaurant
 type Entry struct {
 	Name	string	`json:"name"` // name of the entry
 	Dish	string  `json:"dish"` // name of the dish
 }
 
-type Restaurant struct {
-	Name 		string 	`json:"name"` // name of the restaurant
-	Entries 	[]Entry `json:"entries"` // list of dishes for that restaurant
+// globals for all restaurants
+var karis Restaurant = Restaurant{}
+var express Restaurant = Restaurant{}
+var linsen Restaurant = Restaurant{}
+var ja Restaurant = Restaurant{}
+var hyllan Restaurant = Restaurant{}
+var kokboken Restaurant = Restaurant{}
+var lsresto Restaurant = Restaurant{}
+var lskitchen Restaurant = Restaurant{}
+var einstein Restaurant = Restaurant{}
+
+
+func UpdateRestaurants(){
+	for {
+    	karis = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/karrestaurangen/Veckomeny.rss")
+		express = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/express/V%C3%A4nster.rss")
+		linsen = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/linsen/RSS%20Feed.rss")
+		ja = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/j-a-pripps-pub-cafe/RSS%20Feed.rss")
+		hyllan = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/hyllan/RSS%20Feed.rss")
+		kokboken = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/kokboken/RSS%20Feed.rss")
+		lsresto = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/l-s-resto/RSS%20Feed.rss")
+		lskitchen = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/l-s-kitchen/Projektor.rss")
+		einstein = FetchEinstein()
+		RestaurantLogger("Updated all restaurants! Waiting 15 minutes until next update")
+		time.Sleep(15 * time.Minute)
+	}
 }
+
 
 func FetchCHS(rss string) Restaurant {
 	// get the rss feed
@@ -48,6 +78,7 @@ func FetchCHS(rss string) Restaurant {
 			}
 		}
 	}
+	RestaurantLogger("Updated: " + restaurantName)
 	return restaurant
 }
 
@@ -100,5 +131,6 @@ func FetchEinstein() Restaurant {
     		}
     	}
   	})
+  	RestaurantLogger("Updated: Einstein")
 	return einstein
 }

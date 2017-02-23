@@ -21,3 +21,10 @@ func Logger(inner http.Handler, name string) http.Handler {
 		)
 	})
 }
+
+func RestaurantLogger(text string) {
+	log.Printf(
+		"%s",
+		text,
+	)
+}
