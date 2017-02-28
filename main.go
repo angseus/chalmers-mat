@@ -1,19 +1,19 @@
 package main
 
 import (
-	"log"
-	"net/http"	
+    "log"
+    "net/http"  
 )
 
 
 
 func main() {
-	// another goroutine to update restaurants
-	go UpdateRestaurants()
+    // another goroutine to update restaurants
+    go UpdateRestaurants()
 
-	// create router
-	router := NewRouter()
+    // create router
+    router := NewRouter()
 
-	// start serving
-	log.Fatal(http.ListenAndServe(":8080", router))
+    // start serving
+    log.Fatal(http.ListenAndServe(":8080", router))
 }
