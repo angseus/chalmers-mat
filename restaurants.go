@@ -30,7 +30,6 @@ var lsresto Restaurant = Restaurant{}
 var lskitchen Restaurant = Restaurant{}
 var einstein Restaurant = Restaurant{}
 
-
 func UpdateRestaurants(){
     for {
         karis = FetchCHS("http://intern.chalmerskonferens.se/view/restaurant/karrestaurangen/Veckomeny.rss")

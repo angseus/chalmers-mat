@@ -5,8 +5,6 @@ import (
     "net/http"  
 )
 
-
-
 func main() {
     // another goroutine to update restaurants
     go UpdateRestaurants()
